@@ -1,4 +1,4 @@
-# Jussi
+# Ask JussiAI, your digital twin.
 
 This is the installation guide for the Jussi program. The program is designed
 to do something specific.
