@@ -83,3 +83,7 @@ To use Jussi, follow these steps:
   ```bash
    Jussi "Your input text here"
    ```
+
+## Example Prompt
+
+![Example prompt and response](JussiAI.png)
