@@ -19,7 +19,7 @@ pip install openai dotenv
 Make sure you're in an activated virtual environment (if needed) before
 installing the dependencies.
 
-1. **Environment Variables:**  The program uses the OPENAI_API_KEY
+3. **Environment Variables:**  The program uses the OPENAI_API_KEY
 environment variable to set the OpenAI API key. Create a .env file in the root
 directory of the program. If you prefer to store the .env file in a specific
 directory, such as ~/.jussiai/.env, you can do the following:
@@ -36,7 +36,7 @@ Create or edit the .env file in that directory and add your key like this:
 OPENAI_API_KEY=YOUR_KEY_HERE
 ```
 
-1. **Running the Program:** You can run the program from the command line like
+4. **Running the Program:** You can run the program from the command line like
 this:
 
 ```bash
