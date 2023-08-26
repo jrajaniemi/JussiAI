@@ -93,4 +93,12 @@ To use Jussi, follow these steps:
 
 ## Example Prompt
 
-![Example prompt and response](JussiAI.png)
+  ```bash
+  git diff | Jussi Create a git commit message for these changes:
+  ```
+  
+  ```bash
+  cat language_en.json | Jussi Translate this JSON file into German:
+  ```
+
+
