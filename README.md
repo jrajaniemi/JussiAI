@@ -91,7 +91,7 @@ To use Jussi, follow these steps:
    Jussi "Your input text here"
    ```
 
-## Example Prompt
+## Example Prompts
 
   ```bash
   git diff | Jussi Create a git commit message for these changes:
@@ -101,4 +101,36 @@ To use Jussi, follow these steps:
   cat language_en.json | Jussi Translate this JSON file into German:
   ```
 
+  ```bash
+  $ cat captions_en.sbv | Jussi Translate this YouTube subtitle into Finnish: | tee captions_fi.sbv
+  0:00:30.038,0:01:00.034
+  Et saisi poistaa rengasta tällä tavalla. Ensinnäkin, sinun tulisi katkaista ketjut. Poista sitten takavaihteisto ja lopuksi rengas.
 
+  0:01:15.032,0:01:30.031
+  Minulla oli pari desilitraa bensiiniä, joten huuhtelin ensin ketjut sillä.
+
+  0:01:35.030,0:02:00.027
+  Seuraavaksi puhdistin ne autonpyörän puhdistusaineella ja huuhtelin sitten ketjut vedellä. Ravistin sitä perusteellisesti ja annoin sen olla 10 minuuttia.
+
+  0:02:20.024,0:02:45.021
+  Seuraavaksi puhdistin sen ohentimella. Ravistin sitä ja annoin sen olla 30 minuuttia.
+
+  0:02:50.020,0:03:10.018
+  Ulkopuolelta ketjut näyttävät todella puhtailta. Mutta kun taivutat niitä, voit tuntea hiekan ja lian linkkien välissä. Kokeillaan ultraäänipuhdistinta. Nyt ketjut ovat todella puhtaat!
+
+  0:03:18.017,0:03:25.016
+  Kytke lämpö päälle ja säädä veden lämpötila 60 asteeseen Celsius.
+
+  0:03:50.012,0:04:05.011
+  Takavaihteisto puhdistetaan ultraäänipuhdistimessa. Puhdistusaika on 2h 30 min. Vaihdoin veden joka ½ tunti.
+
+  0:04:15.009,0:04:25.008
+  Takavaihteiston ripustin on jumissa. CRC auttaa tässä.
+
+  0:04:50.005,0:05:20.001
+  Takarattaiden poistaminen nopeuttaa takavaihteen puhdistusta.
+
+  0:05:30.041,0:05:45.039
+  Lisäsin liukupinnoille ohuen kerroksen vaseliinia.
+  ...
+  ```
