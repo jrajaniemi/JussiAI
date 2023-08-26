@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
+# Jussi.py
 from dotenv import load_dotenv
 import os
 import openai
 import sys
 import html
+import select
 
 def create_jussiai_directory():
     # Create the ~/.jussiai directory if it doesn't exist
@@ -35,7 +37,7 @@ def load_env_file():
 
 def sanitize_input(input_text, max_length):
     # Sanitize user input to include only allowed characters and limit the length
-    allowed_chars = set('.:abcdefghijklmnopqrstuvwxyzåäö ABCDEFGHIJKLMNOPQRSTUVWXYZÅÄÖ')
+    allowed_chars = set('.:-()abcdefghijklmnopqrstuvwxyzåäö ABCDEFGHIJKLMNOPQRSTUVWXYZÅÄÖ')
     sanitized_input = ''.join(char for char in input_text if char in allowed_chars)[:max_length]
     sanitized_input = html.escape(sanitized_input)
     return sanitized_input
@@ -59,12 +61,20 @@ def main():
     user_input = ' '.join(sys.argv[1:])
     max_length = 100
     sanitized_input = sanitize_input(user_input, max_length)
+    file_content = ""
+
+    i, o, e = select.select([sys.stdin], [], [], 0.1)
+    if i:
+        file_content = sys.stdin.read()
+
+    # print(file_content)
 
     # Define the initial messages for the chat
     messages=[
-        {"role": "system", "content": "You are a helpful but software developer."},
-        {"role": "user", "content": sanitized_input}
+        {"role": "system", "content": "You are a helpful software developer. "},
+        {"role": "user", "content": sanitized_input + " " +file_content}
     ]
+    # print(messages)
 
     # Set the OpenAI API key
     openai.api_key = os.getenv("OPENAI_API_KEY")

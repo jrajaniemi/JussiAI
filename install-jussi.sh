@@ -4,7 +4,7 @@
 pip3 install openai python-dotenv
 
 # Copy Jussi to the user's home directory
-cp Jussi /usr/local/bin/Jussi
+cp Jussi.py /usr/local/bin/Jussi
 
 # Make Jussi executable
 chmod +x /usr/local/bin/Jussi
