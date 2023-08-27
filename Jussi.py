@@ -101,14 +101,27 @@ def main():
         {"role": "user", "content": sanitized_input + " " + file_content}
     ]
 
-    # Set the OpenAI API key
-    openai.api_key = os.getenv("OPENAI_API_KEY")
+    try:
+        # Set the OpenAI API key
+        openai.api_key = os.getenv("OPENAI_API_KEY")
 
-    # Make a request to the OpenAI API
-    completion = openai.ChatCompletion.create(
-        model="gpt-4",
-        messages=messages
-    )
+        # Make a request to the OpenAI API
+        completion = openai.ChatCompletion.create(
+            model="gpt-4",
+            messages=messages
+        )
+    except openai.error.APIError as e:
+        # Handle API error here, e.g. retry or log
+        print(f"OpenAI API returned an API Error: {e}")
+        pass
+    except openai.error.APIConnectionError as e:
+        # Handle connection error here
+        print(f"Failed to connect to OpenAI API: {e}")
+        pass
+    except openai.error.RateLimitError as e:
+        # Handle rate limit error (we recommend using exponential backoff)
+        print(f"OpenAI API request exceeded rate limit: {e}")
+        pass
 
     # Extract and print the assistant's response
     response = completion["choices"][0]["message"]["content"]
