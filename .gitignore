@@ -8,6 +8,8 @@
 *.bs
 .env
 spot.py
+install
+*.json
 
 # Devel::Cover
 cover_db/

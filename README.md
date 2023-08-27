@@ -94,11 +94,11 @@ To use Jussi, follow these steps:
 ## Example Prompts
 
   ```bash
-  git diff | Jussi Create a git commit message for these changes:
+  $ git diff | Jussi Create a git commit message for these changes:
   ```
   
   ```bash
-  cat language_en.json | Jussi Translate this JSON file into German:
+  $ cat language_en.json | Jussi Translate this JSON file into German:
   ```
 
   ```bash
