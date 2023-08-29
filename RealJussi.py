@@ -10,6 +10,56 @@ import tiktoken
 import threading
 import time
 import hashlib
+import re
+import argparse
+from typing import List
+
+# Pre-compile regular expressions
+HTML_TAG_RE = re.compile(r"<.*?>")
+URL_RE = re.compile(
+    r"http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\\(\\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+"
+)
+
+
+# Function to clean text based on various parameters
+def clean_text(
+    input_text: str,
+    remove_html: bool = True,
+    remove_urls: bool = True,
+    replace_tabs_spaces: bool = True,
+    replace_newlines: bool = True,
+) -> str:
+    """Clean the input text based on the given parameters."""
+    if remove_html:
+        input_text = HTML_TAG_RE.sub("", input_text)
+    if remove_urls:
+        input_text = URL_RE.sub("", input_text)
+    if replace_tabs_spaces:
+        input_text = re.sub(r"\s+", " ", input_text)
+    if replace_newlines:
+        input_text = input_text.replace("\n", " ")
+    return input_text
+
+
+# Function to parse arguments
+def parse_arguments() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(
+        description="Clean text based on various parameters."
+    )
+    parser.add_argument("--remove_html", action="store_true", help="Remove HTML tags")
+    parser.add_argument("--remove_urls", action="store_true", help="Remove URLs")
+    parser.add_argument(
+        "--replace_tabs_spaces",
+        action="store_true",
+        help="Replace tabs and extra spaces with a single space",
+    )
+    parser.add_argument(
+        "--replace_newlines",
+        action="store_true",
+        help="Replace newline characters with spaces",
+    )
+    parser.add_argument("extra_args", nargs="*", help="Extra arguments")
+    return parser.parse_args()
 
 
 # Function to calculate the number of tokens in a text string
@@ -59,6 +109,7 @@ def sanitize_input(input_text, max_length):
     return sanitized_input
 
 
+# Function to make an API call to OpenAI
 def api_call(messages):
     global completion
     try:
@@ -93,12 +144,14 @@ def api_call(messages):
         pass
 
 
+# Function to display a spinning cursor while waiting
 def spinning_cursor():
     while True:
         for cursor in "|/-\\":
             yield cursor
 
 
+# Main function
 def main():
     create_jussiai_directory()
 
@@ -116,15 +169,29 @@ def main():
         print("Please provide text as a parameter!")
         return
 
-    # Add and sanitize the user's input for the messages
-    user_input = " ".join(sys.argv[1:])
-    max_length = 100
-    sanitized_input = sanitize_input(user_input, max_length)
-    file_content = ""
+    # Parse the arguments
+    args = parse_arguments()
 
+    # Read from stdin if available
     i, o, e = select.select([sys.stdin], [], [], 0.1)
     if i:
         file_content = sys.stdin.read()
+
+    # Sanitize and concatenate extra arguments
+    max_length = 100
+    user_input = " ".join(args.extra_args) if args.extra_args else ""
+    sanitized_input = sanitize_input(user_input, max_length)
+
+    # Clean the text based on the arguments
+    file_content = clean_text(
+        file_content,
+        args.remove_html,
+        args.remove_urls,
+        args.replace_tabs_spaces,
+        args.replace_newlines,
+    )
+    print(file_content)
+    print(sanitized_input)
 
     # Calculate the number of tokens in the sanitized input and file content
     num_tokens = num_tokens_from_string(
@@ -134,9 +201,7 @@ def main():
     # Check if the token limit is exceeded
     if num_tokens > 40000:
         print(
-            "Token limit that was exceeded("
-            + str(num_tokens)
-            + "). You are allowed to use up to 40,000 tokens per minute."
+            f"Token limit exceeded ({num_tokens}). You are allowed to use up to 40,000 tokens per minute."
         )
         return
 
@@ -149,9 +214,11 @@ def main():
         {"role": "user", "content": sanitized_input + " " + file_content},
     ]
 
+    # Start the API call in a separate thread
     thread = threading.Thread(target=api_call, args=(messages,))
     thread.start()
 
+    # Display a spinning cursor while waiting
     spinner = spinning_cursor()
     sys.stdout.write("Processing your request... ")
     sys.stdout.flush()
