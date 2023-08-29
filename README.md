@@ -134,3 +134,53 @@ To use Jussi, follow these steps:
   Lisäsin liukupinnoille ohuen kerroksen vaseliinia.
   ...
   ```
+
+# Trim.py Text Cleaner
+
+## Overview
+
+`Text Cleaner` is a Python script designed to clean text based on various parameters. It can remove HTML tags, URLs, and replace tabs, extra spaces, and newline characters with single spaces. The script is highly customizable and can be run from the command line.
+
+## Requirements
+
+- Python 3.x
+
+## Installation
+
+1. Clone the repository:
+
+    ```bash
+    git clone https://github.com/jrajaniemi/JussiAI
+    ```
+
+2. Navigate to the directory:
+
+    ```bash
+    cd JussiAI
+    ```
+
+3. Make the script executable:
+
+    ```bash
+    chmod 755 trim.py
+    ```
+
+## Usage
+
+To run the script with all cleaning options enabled (default behavior):
+
+```bash
+echo "Your text here" | ./trim.py
+```
+
+To customize the cleaning process, you can use the following command-line arguments:
+
+--remove_html: To remove HTML tags (enabled by default).
+--remove_urls: To remove URLs (enabled by default).
+--replace_tabs_spaces: To replace tabs and extra spaces with a single space (enabled by default).
+--replace_newlines: To replace newline characters with spaces (enabled by default).
+Example:
+
+```bash
+echo "Your text here" | ./trim.py --remove_html --remove_urls
+```

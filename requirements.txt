@@ -1,3 +1,5 @@
+dotenv
 openai
-python-dotenv
 tiktoken
+argparse
+html
