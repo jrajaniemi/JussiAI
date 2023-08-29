@@ -175,10 +175,11 @@ echo "Your text here" | ./trim.py
 
 To customize the cleaning process, you can use the following command-line arguments:
 
---remove_html: To remove HTML tags (enabled by default).
---remove_urls: To remove URLs (enabled by default).
---replace_tabs_spaces: To replace tabs and extra spaces with a single space (enabled by default).
---replace_newlines: To replace newline characters with spaces (enabled by default).
+* --remove_html: To remove HTML tags (enabled by default).
+* --remove_urls: To remove URLs (enabled by default).
+* --replace_tabs_spaces: To replace tabs and extra spaces with a single space (enabled by default).
+* --replace_newlines: To replace newline characters with spaces (enabled by default).
+
 Example:
 
 ```bash
