@@ -124,7 +124,6 @@ def api_call(messages):
 
         # Get the hexadecimal representation of the hash
         username_hash = hash_object.hexdigest()
-        print(username_hash)
 
         # Make a request to the OpenAI API
         completion = openai.ChatCompletion.create(
@@ -176,6 +175,8 @@ def main():
     i, o, e = select.select([sys.stdin], [], [], 0.1)
     if i:
         file_content = sys.stdin.read()
+    else:
+        file_content = ""
 
     # Sanitize and concatenate extra arguments
     max_length = 100
@@ -190,8 +191,6 @@ def main():
         args.replace_tabs_spaces,
         args.replace_newlines,
     )
-    print(file_content)
-    print(sanitized_input)
 
     # Calculate the number of tokens in the sanitized input and file content
     num_tokens = num_tokens_from_string(
@@ -209,7 +208,7 @@ def main():
     messages = [
         {
             "role": "system",
-            "content": "You are a helpful but annoying nitpicking software designer.",
+            "content": "You are a helpful software designer.",
         },
         {"role": "user", "content": sanitized_input + " " + file_content},
     ]
@@ -231,6 +230,7 @@ def main():
 
     # Extract and print the assistant's response
     response = completion["choices"][0]["message"]["content"]
+
     print("\n" + response)
 
 
