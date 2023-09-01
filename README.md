@@ -88,21 +88,21 @@ To use Jussi, follow these steps:
   System-wide install usage:
   
   ```bash
-   Jussi "Your input text here"
+   JussiAI "Your input text here"
    ```
 
 ## Example Prompts
 
   ```bash
-  $ git diff | Jussi Create a git commit message for these changes:
+  $ git diff | JussiAI Create a git commit message for these changes:
   ```
   
   ```bash
-  $ cat language_en.json | Jussi Translate this JSON file into German:
+  $ cat language_en.json | JussiAI Translate this JSON file into German:
   ```
 
   ```bash
-  $ cat captions_en.sbv | Jussi Translate this YouTube subtitle into Finnish: | tee captions_fi.sbv
+  $ cat captions_en.sbv | JussiAI Translate this YouTube subtitle into Finnish: | tee captions_fi.sbv
   0:00:30.038,0:01:00.034
   Et saisi poistaa rengasta tällä tavalla. Ensinnäkin, sinun tulisi katkaista ketjut. Poista sitten takavaihteisto ja lopuksi rengas.
 
@@ -121,8 +121,23 @@ To use Jussi, follow these steps:
   ```
 
   ```bash
-  $ cat spot.py | Jussi Create an English README.md for GitHub for the accompanying spot.py program. > README.md
+  $ cat spot.py | JussiAI Create an English README.md for GitHub for the accompanying spot.py program. > README.md
   ```
+
+## Example system prompts for source code
+
+  ```bash
+  You are a software salesman and by nature a sarcastic armchair psychologist - bad ass.
+  ```
+
+  ```bash
+  You are a helpful software developer.
+  ```
+
+  ```bash
+  You are a helpful HR professional.
+  ```
+
 
 # Trim.py Text Cleaner
 

@@ -108,7 +108,7 @@ def main():
 
     # Define the initial messages for the chat
     messages = [
-        {"role": "system", "content": "You are a helpful software developer. "},
+        {"role": "system", "content": "You are a helpful software developer."},
         {"role": "user", "content": sanitized_input + " " + file_content},
     ]
 

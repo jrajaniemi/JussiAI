@@ -208,7 +208,7 @@ def main():
     messages = [
         {
             "role": "system",
-            "content": "You are a helpful software designer.",
+            "content": "You are a helpful software developer.",
         },
         {"role": "user", "content": sanitized_input + " " + file_content},
     ]
