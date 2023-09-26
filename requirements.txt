@@ -11,3 +11,6 @@ time
 os
 sys
 typing
+tabulate
+xlrd
+pandas
