@@ -11,6 +11,9 @@ spot.py
 install
 *.json
 *.pdf
+*.xls
+*.txt
+*.log
 
 # Devel::Cover
 cover_db/
